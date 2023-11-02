@@ -1,0 +1,15 @@
+version: '3'
+
+volumes:
+  pg_data:
+services:
+  db:
+    image: postgres:13
+    env_file: .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  backend:
+    image: ${DOCKER_USERNAME}/help_ddu_bot_backend:latest
+    env_file: .env
+    depends_on:
+      - db
